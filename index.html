@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Fan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🌬 Virtual Fan</h1>
+        <div class="fan-container">
+            <div class="fan-blades" id="fan"></div>
+        </div>
+
+        <div class="controls">
+            <button onclick="startFan()">Start</button>
+            <button onclick="stopFan()">Stop</button>
+            <button onclick="increaseSpeed()">Speed +</button>
+            <button onclick="decreaseSpeed()">Speed -</button>
+        </div>
+
+        <p class="speed-display">Current Speed: <span id="speed">1</span>x</p>
+    </div>
+
+    <script>
+        let speed = 1;
+        let fan = document.getElementById("fan");
+
+        function startFan() {
+            fan.style.animationPlayState = "running";
+        }
+
+        function stopFan() {
+            fan.style.animationPlayState = "paused";
+        }
+
+        function increaseSpeed() {
+            speed += 0.5;
+            fan.style.animationDuration = (2 / speed) + "s";
+            document.getElementById("speed").innerText = speed.toFixed(1);
+        }
+
+        function decreaseSpeed() {
+            if (speed > 0.5) {
+                speed -= 0.5;
+                fan.style.animationDuration = (2 / speed) + "s";
+                document.getElementById("speed").innerText = speed.toFixed(1);
+            }
+        }
+    </script>
+</body>
+</html>
